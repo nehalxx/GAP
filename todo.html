@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Calendar Task System</title>
+  <link rel="stylesheet" href="./fontawesome-free-6.7.2-web/fontawesome-free-6.7.2-web/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+    crossorigin="anonymous"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: white;
+      padding: 30px;
+      margin: 0px;
+      padding: 0px;
+      background-image: url('background.jpeg');
+    }
+
+    nav {
+      margin-top: 0px;
+      padding: 0px;
+      height: 80px;
+      display: flex;
+      background-color: rosybrown;
+      justify-content: space-between;
+
+    }
+
+    ul {
+
+      margin-left: 50px;
+
+    }
+
+    .calendar {
+      max-width: 700px;
+      margin: 25px;
+      background: rgba(205, 92, 92, 0.534);
+      border-radius: 10px;
+      /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+      overflow: hidden;
+    }
+
+    header {
+      margin-top: 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba(95, 46, 71, 0.637);
+      color: white;
+      padding: 15px;
+    }
+
+    header button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    header h2 {
+      margin: 0;
+    }
+
+    .days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+      padding: 10px;
+    }
+
+    .day-name {
+      font-weight: bold;
+      padding: 10px 0;
+    }
+
+    .day {
+      padding: 15px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+    .day:hover {
+      background: white;
+    }
+
+    .today {
+      background: rgba(95, 46, 71, 0.726);
+      color: white;
+      border-radius: 50%;
+    }
+
+    .task-box {
+      border-radius: 10px;
+      margin-top: 25px;
+      padding: 20px;
+      border-top: 1px solid white;
+      background: rgb(229, 179, 179);
+    }
+
+    .task-box h3 {
+      margin-top: 0px;
+    }
+
+    .task-box input {
+      width: 70%;
+      padding: 8px;
+      border: 1px solid rgb(0, 0, 0);
+      border-radius: 6px;
+      margin-right: 10px;
+      background-color:white;
+    }
+
+    .task-box button {
+      padding: 8px 12px;
+      background: rgba(95, 46, 71, 0.726);
+      color: white;
+      border:none;    
+      border-radius: 6px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    #tasklist {
+      margin: 2px 0;
+      font-size: 16px;
+      padding-left: 20px;
+    }
+
+    li {
+      display: inline-block;
+      margin-left: 70px;
+      margin-top: 40px;
+      font-family: cursive;
+      font-size: larger;
+
+    }
+
+    .task-date {
+      color: rgb(13, 7, 7);
+    }
+
+    .delete-btn {
+      color: red;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    table {
+      width: 200px;
+      border-radius: 10px;
+      margin-top: 25px;
+      background-color: rgba(80, 31, 31, 0.534);;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation baar and background -->
+  <nav>
+    <div>
+      <ul>
+        <li><a href="home.html" style="color: black; ">Home</a></li>
+        <li><a href="quiz.html" style="color: black; ">Quiz</a></li>
+        <li><a href="guidance.html" style="color: black; ">Guidance</a></li>
+        <li><a href="todo.html" style="color: black; ">To-Do</a></li>
+        <li><a href="FAQ.html" style="color: black; ">FAQ</a></li>
+        <li>
+          <p style="margin-left: 300px;margin-right: 0px; font-size: large;"><i class="fa-regular fa-user"></i></p>
+        </li>
+        <li><a href="profile.html" style="color: black;">
+            <p style="margin-left: 0px; padding: 0;">Profile</p>
+          </a></li>
+      </ul>
+    </div>
+  </nav>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.min.js"
+    integrity="sha384-VQqxDN0EQCkWoxt/0vsQvZswzTHUVOImccYmSyhJTp7kGtPed0Qcx8rK9h9YEgx+"
+    crossorigin="anonymous"></script>
+
+  <!-- Calender -->
+  <div style="display: inline-flex; gap:80px;">
+    <div class="calendar">
+      <header>
+        <button onclick="changeMonth(-1)">&#8592;</button>
+        <h2 id="monthYear"></h2>
+        <button onclick="changeMonth(1)">&#8594;</button>
+      </header>
+
+      <div class="days" id="calendarDays"></div>
+    </div>
+    <!-- todo list -->
+    <div class="task-box" id="taskBox" style="display: none;">
+      <h3>Tasks for <span class="task-date" id="selectedDateText"></span></h3>
+      <input type="text" id="taskInput" placeholder="Enter task..." />
+      <button onclick="addTask()">Add</button>
+      <ul id="taskList"></ul>
+    </div>
+
+    <!-- UP list -->
+    <table >
+
+      <tr>
+        <th></th>
+        <th>Urgent</th>
+        <th> </th>
+        <th>Priority</th>
+      </tr>
+      <tr>
+        <td> </td> 
+        <td> </td> 
+        <td> </td> 
+        <td> </td>
+      </tr>
+      <tr>
+        <td> </td> 
+        <td> </td> 
+        <td> </td> 
+        <td> </td>
+      </tr>
+      <tr>
+        <td>1.</td>
+        <td class="status empty" onclick="toggleStatus(this)">&#9675;</td>
+        <td> </td>
+        <td class="status empty" onclick="toggleStatus(this)">&#9675;</td>
+      </tr>
+      <tr>
+        <td>2.</td>
+        <td class="status empty" onclick="toggleStatus(this)">&#9675;</td>
+        <td> </td>
+        <td class="status empty" onclick="toggleStatus(this)">&#9675;</td>
+      </tr>
+      <tr>
+        <td>3.</td>
+        <td class="status empty" onclick="toggleStatus(this)">&#9675;</td>
+        <td> </td>
+        <td class="status empty" onclick="toggleStatus(this)">&#9675;</td>
+      </tr>
+      <tr>
+        <td>4.</td>
+        <td class="status empty" onclick="toggleStatus(this)">&#9675;</td>
+        <td> </td>
+        <td class="status empty" onclick="toggleStatus(this)">&#9675;</td>
+      </tr>
+      <tr>
+        <td>5.</td>
+        <td class="status empty" onclick="toggleStatus(this)">&#9675;</td>
+        <td> </td>
+        <td class="status empty" onclick="toggleStatus(this)">&#9675;</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const calendarDays = document.getElementById('calendarDays');
+    const monthYear = document.getElementById('monthYear');
+    const taskBox = document.getElementById('taskBox');
+    const selectedDateText = document.getElementById('selectedDateText');
+    const taskInput = document.getElementById('taskInput');
+    const taskList = document.getElementById('taskList');
+
+    const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    let currentDate = new Date();
+    let selectedDate = null;
+    const tasks = {};
+
+    function renderCalendar(date) {
+      const year = date.getFullYear();
+      const month = date.getMonth();
+      const firstDay = new Date(year, month, 1).getDay();
+      const lastDate = new Date(year, month + 1, 0).getDate();
+
+      monthYear.textContent = date.toLocaleString('default', { month: 'long', year: 'numeric' });
+      calendarDays.innerHTML = '';
+
+      for (let day of dayNames) {
+        const dayName = document.createElement('div');
+        dayName.classList.add('day-name');
+        dayName.textContent = day;
+        calendarDays.appendChild(dayName);
+      }
+
+      for (let i = 0; i < firstDay; i++) {
+        calendarDays.appendChild(document.createElement('div'));
+      }
+
+      for (let day = 1; day <= lastDate; day++) {
+        const dayDiv = document.createElement('div');
+        dayDiv.classList.add('day');
+        dayDiv.textContent = day;
+
+        const today = new Date();
+        if (
+          day === today.getDate() &&
+          month === today.getMonth() &&
+          year === today.getFullYear()
+        ) {
+          dayDiv.classList.add('today');
+        }
+
+        dayDiv.onclick = () => selectDate(year, month, day);
+        calendarDays.appendChild(dayDiv);
+      }
+    }
+
+    function changeMonth(offset) {
+      currentDate.setMonth(currentDate.getMonth() + offset);
+      renderCalendar(currentDate);
+      taskBox.style.display = 'none'; // Hide task section when month changes
+    }
+
+    function selectDate(year, month, day) {
+      selectedDate = `${year}-${(month + 1).toString().padStart(2, '0')}-${day
+        .toString()
+        .padStart(2, '0')}`;
+      selectedDateText.textContent = new Date(selectedDate).toDateString();
+      taskBox.style.display = 'block';
+      taskInput.value = '';
+      renderTasks();
+    }
+
+    function addTask() {
+      const taskText = taskInput.value.trim();
+      if (!taskText || !selectedDate) return;
+
+      if (!tasks[selectedDate]) {
+        tasks[selectedDate] = [];
+      }
+
+      tasks[selectedDate].push(taskText);
+      taskInput.value = '';
+      renderTasks();
+    }
+    function renderTasks() {
+      taskList.innerHTML = '';
+
+      if (!selectedDate || !tasks[selectedDate]) return;
+
+      tasks[selectedDate].forEach((task, index) => {
+        const taskItem = document.createElement('li');
+        taskItem.innerHTML = `${index + 1}. ${task} <span class="delete-btn" onclick="deleteTask(${index})">&times;</span>`;
+        taskList.appendChild(taskItem);
+      });
+    }
+
+    function deleteTask(index) {
+      tasks[selectedDate].splice(index, 1);
+      renderTasks();
+    }
+
+
+
+    renderCalendar(currentDate);
+    function toggleStatus(cell) {
+      if (cell.classList.contains('empty')) {
+        cell.innerHTML = '&#10004;'; // tick
+        cell.classList.remove('empty');
+        cell.classList.add('tick');
+      }
+      else if (cell.classList.contains('tick')) {
+        cell.innerHTML = '&#10060;'; // cross
+        cell.classList.remove('tick');
+        cell.classList.add('cross');
+      }
+      else if (cell.classList.contains('cross')) {
+        cell.innerHTML = '&#9675;'; // empty again
+        cell.classList.remove('cross');
+        cell.classList.add('empty');
+      }
+    }
+  </script>
+</body>
+
+</html>

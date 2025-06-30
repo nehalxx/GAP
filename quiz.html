@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="./fontawesome-free-6.7.2-web/fontawesome-free-6.7.2-web/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+        crossorigin="anonymous"></script>
+    <style>
+        body{
+            margin: 0px;
+            padding: 0px;
+            background-image: url('background.jpeg');
+        }
+        nav{
+            margin-top: 0px;
+            padding: 0px;
+            height: 80px;
+            display: flex;
+            background-color: rgba(188, 143, 143, 0.842);
+            justify-content: space-between;
+            
+        }
+        ul{
+            
+            margin-left: 50px;
+            
+        }
+        li{
+            display: inline-block;
+            margin-left: 70px;
+            margin-top: 40px;
+            font-family:cursive;
+            font-size: larger;
+
+        }
+        .quiz-container {
+            background:rgba(243, 153, 153, 0.875);
+            padding: 20px;
+            border-radius: 10px;
+          text-align: center;
+          box-shadow: black;  
+            width: 550px;
+            height: 400px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            border: none;
+            background: rgb(7, 7, 79);
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            
+        }
+
+        button:hover {
+            background: rgba(243, 231, 16, 0.604);
+        }
+
+        .option {
+            display: block;
+            margin: 5px 0;
+            padding: 10px;
+            background: rgba(178, 65, 65, 0.921);
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: center;
+
+        }
+
+        .option:hover {
+            background:rgba(243, 231, 16, 0.604);;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.min.js"
+        integrity="sha384-VQqxDN0EQCkWoxt/0vsQvZswzTHUVOImccYmSyhJTp7kGtPed0Qcx8rK9h9YEgx+"
+        crossorigin="anonymous"></script>
+    <nav>
+        <div>
+            <ul>
+                <li><a href="home.html" style="color: black; ">Home</a></li>
+                <li><a href="quiz.html" style="color: black; ">Quiz</a></li> 
+                <li><a href="guidance.html" style="color: black; ">Guidance</a></li> 
+                <li><a href="todo.html" style="color: black; ">To-Do</a></li> 
+                <li><a href="FAQ.html" style="color: black; ">FAQ</a></li>
+                <li><p style="margin-left: 300px;margin-right: 0px; font-size: large;"><i class="fa-regular fa-user"></i></p></li>
+                <li><a href="profile.html" style="color: black;"><p style="margin-left: 0px; padding: 0;">Profile</p></a></li>
+            </ul>
+        </div>
+          
+    </nav>
+    <div class="quiz-container" style="margin-top: 80px; margin-left: 400px; height: 450px;">
+        <h1>Find Your Study Style!</h1>
+        <div id="question-container">
+            <p  id="question"><b>question...</b> </p>
+            <div style="padding: 30px;" id="options"></div>
+        </div>
+        <button id="next-btn">Next</button>
+        <p id="result"></p>
+    </div>
+    <div style="display: flex;">
+    <script>
+        
+        const questions = [
+            {
+
+                question: "How do you prefer to study?",
+                options: [
+                    { text: "Watching videos", type: "Visual"},
+                    { text: "Listening to lectures", type: "Auditory" },
+                    { text: "Writing notes", type: "Written" },
+                    { text: "Doing practice problems", type: "Detailed" }
+                ]
+            },
+            {
+                question: "What helps you remember information?",
+                options: [
+                    { text: "Diagrams and charts", type: "Visual" },
+                    { text: "Repeating out loud", type: "Auditory" },
+                    { text: "Rewriting notes ", type: "Written" },
+                    { text: "Using hands-on activities", type: "Detailed" }
+                ]
+            },
+            {
+                question: "How much is your attention span?",
+                options: [
+                    { text: "30 mins ", type: "Visual" },
+                    { text: "1 hr ", type: "Auditory" },
+                    { text: "2-3hrs", type: "Written" },
+                    { text: "Depends on what the subject is", type: "Detailed" }
+                ]
+            },
+            {
+                question: "How early do you complete your tasks?",
+                options: [
+                    { text: "a day prior/I forget ", type: "Visual" },
+                    { text: "1-2 days prior ", type: "Auditory" },
+                    { text: "a week prior", type: "Written" },
+                    { text: "Do homework of subjects that aren't important first", type: "Detailed" }
+                ]
+            }
+            
+        ];
+
+        let scores = { Visual: 0, Written: 0, Auditory: 0, Detailed: 0 };
+        let Index = 0;
+
+        const questionElement = document.getElementById("question");
+        const optionsContainer = document.getElementById("options");
+        const nextButton = document.getElementById("next-btn");
+        const resultElement = document.getElementById("result");
+
+        function Ques() {
+            if (Index < questions.length) {
+                const currentQuestion = questions[Index];
+                questionElement.textContent = currentQuestion.question;
+                optionsContainer.innerHTML = "";
+
+                currentQuestion.options.forEach(option => {
+                    const button = document.createElement("button");
+                    button.textContent = option.text;
+                    button.classList.add("option");
+                    button.onclick = () => selectOption(option.type);
+                    optionsContainer.appendChild(button);
+                });
+            } else {
+                showResult();
+            }
+        }
+
+        function selectOption(type) {
+            scores[type]++;
+            Index++;
+            Ques();
+        }
+
+        function showResult() {
+            questionElement.textContent = "Quiz Completed!";
+            optionsContainer.innerHTML = "";
+            nextButton.style.display = "none";
+
+            let highestScore = 0;
+            let bestMatch = "";
+            
+            for (let type in scores) {
+                if (scores[type] > highestScore) {
+                    highestScore = scores[type];
+                    bestMatch = type;
+                }
+            }
+
+            resultElement.textContent = `Your study style is: ${bestMatch} `;
+            
+        }
+
+        nextButton.addEventListener("click", () => {
+            if (Index < questions.length) {
+                Ques();
+            }
+        });
+
+        Ques();
+        
+    </script>
+   
+    </div>
+</body>
+</html>
